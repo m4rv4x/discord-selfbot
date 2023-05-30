@@ -7,9 +7,6 @@ A simple discord selfbot, coded in javascript, using discord.js v13.
 git clone https://github.com/m4rv4x/selfbot
 cd selfbot
 npm install
-```
-## Configure it
-```
 cp config.example.json config.json
 nano config.json
 ```

@@ -7,7 +7,7 @@ module.exports = {
 
     const personas = require('../../data/personas.json');
     const config = require('../../config.json');
-    const role = personas.shodan;
+    const role = personas[config.persona]
 
   await message.reply(". . .").then(async m => {
 

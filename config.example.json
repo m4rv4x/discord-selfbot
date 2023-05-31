@@ -3,5 +3,6 @@
 	"discord_token": "YOUR_DISCORD_TOKEN",
 	"prefix": ">",
 	"admin_tag": "m4rv4x#0847",
-	"blacklist_tags": ["nickname#0000", "bot#1111"]
+	"blacklist_tags": ["nickname#0000", "bot#1111"],
+	"persona": "shodan"
 }

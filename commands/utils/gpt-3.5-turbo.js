@@ -30,8 +30,8 @@ module.exports = {
         ]});
         await m.edit(`${completion.data.choices[0].message.content}`) 
       } catch (err) {
-        await m.edit(`[!] Crashed, #BUG ROUTINE`) 
-        console.error(err);
+        await m.edit(`[!] Je ne peux pas vous aider mon algorythme est défaillant`) 
+        console.error("Invalid OPEN AI TOKEN");
         //message.edit('An error occurred processing your request.');
       }
 

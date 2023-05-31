@@ -10,7 +10,6 @@ module.exports = {
 
     await message.reply(". . .").then(async m => {
 
-      if (message.author.bot) return;
       if (!args[0]) return message.reply("**[!]** Please provide a message.\n ``Usage : >gpt [message]``");
       if (message.author.bot) return;
 
@@ -27,6 +26,7 @@ module.exports = {
       try {
         const completion = await openai.createChatCompletion({
           model: "gpt-3.5-turbo",
+          temperature: 0.2,
           messages:[
             {"role": "system", "content": role},
             {"role": "assistant", "content": "An answer to the previous question will go here"},

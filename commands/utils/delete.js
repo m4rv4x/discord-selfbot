@@ -17,10 +17,11 @@ module.exports = {
             if(lastMessage.author.id === client.user.id){
                 await lastMessage.delete();
             }
+            message.reply("Done").then(me => deleteMessage(me));
         } catch (error) {
-        console.error(error);
-        message.channel.send(`An error occurred: \`${error.message}\``);
-        console.log(`[!] error occurred: \`${error.message}\``);
+            console.error(error);
+            message.reply(`An error occurred: \`${error.message}\``).then(me => deleteMessage(me));
+            console.log(`[!] error occurred: \`${error.message}\``);
     }
 
 }

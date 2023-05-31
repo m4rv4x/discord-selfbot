@@ -10,8 +10,6 @@ const client = new Client({
 const config = require('./config.json');
 
 const prefix = config.prefix;
-const openai_token = config.openai_token;
-const discord_token = config.discord_token;
 
 client.commands = new Collection();
 client.aliases = new Collection();

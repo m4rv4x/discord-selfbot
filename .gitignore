@@ -41,4 +41,5 @@ node_modules
 tokens
 config.json
 log.txt
+big-brother.txt
 package-lock.json

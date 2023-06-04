@@ -1,8 +1,9 @@
 {
-	"openai_token": "sk-*******",
-	"discord_token": "YOUR_DISCORD_TOKEN",
+	"openai_token": "****************************************",
+	"persona": "evil", 
+	"discord_token": "****************************************",
+	"discord_token_logger": "****************************************",
 	"prefix": ">",
-	"admin_tag": "m4rv4x#0847",
-	"blacklist_tags": ["nickname#0000", "bot#1111"],
-	"persona": "shodan"
+	"admin_tag": "daddy#6666",
+	"blacklist_tags": ["lol#1111", "random#1234", "rundim#1234"]
 }

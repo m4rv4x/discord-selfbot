@@ -1,5 +1,7 @@
+
 const { Client, Collection, VoiceChannel, MessageEmbed, MessageContextMenuInteraction } = require('discord.js-selfbot-v13');
 const fs = require('fs');
+const chalk = require('chalk');
 
 const client = new Client({
     checkUpdate: false,         // NEED TO UPDATE BTW
@@ -16,15 +18,13 @@ client.aliases = new Collection();
 client.categories = fs.readdirSync("./commands/");
 
 
-
-
 ["command"].forEach(handler => {
     require(`./handlers/${handler}`)(client);
 });
 
 client.on('ready', () => {
     client.user.setActivity('System Shock', { type: "COMPETING" });
-    console.log(`${client.user.username} is running.`);
+    console.log(chalk.green(`${client.user.username} is running.`));
 })
 
 // HANDLE COMMANDS >
@@ -51,9 +51,8 @@ client.on('messageCreate', async message =>{
     setTimeout(() => {
 		try {
 			command.run(message, args, command, client);
-			var d = new Date();
             fs.appendFile('log.txt', `[${new Date().toLocaleString()}] ${message.author.tag} used command: ${cmd} ${args}\n`, function (err) {
-            console.log(`[${humanReadableDate}] [*] [${author}] : ${cmd} ${args} `);
+            console.log(chalk.green(`[${humanReadableDate}] [*] [${author}] : ${cmd} ${args} `));
 
             });
 
@@ -65,8 +64,8 @@ client.on('messageCreate', async message =>{
             message.channel.send(`[*] Routine Fail`);
             user.send(error);
 //              console.error(error);
-            console.log(`[${humanReadableDate}] ✘ ERROR [${author}] : ${cmd} ${args} `);
-			message.reply('✘ Error trying to execute that command!');
+            console.log(chalk.red(`[${humanReadableDate}] ✘ ERROR [${author}] : ${cmd} ${args} `));
+			message.reply(chalk.red('✘ Error trying to execute that command!'));
 		}
 
     }, delay);
@@ -75,3 +74,5 @@ client.on('messageCreate', async message =>{
 
 
 client.login(config.discord_token);
+
+

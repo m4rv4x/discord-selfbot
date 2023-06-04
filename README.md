@@ -1,5 +1,5 @@
 
-# shodan-selfbot
+# shodan-selfbot 0.0.5
 A simple discord selfbot, coded in javascript, using discord.js v13.
 
 ## Download it
@@ -19,8 +19,10 @@ node .
 Added standalones scripts for testing purposes : 
 
 ```
-node chatty.js
-node voice.js
+node chatty.js # will reply to all messages in channel
+node logger.js # Passive Run, Log everythin !
+node hack-attack.js # Some test shellcode
+node voice.js # WIP
 ```
 
 ## Disclaimer
@@ -36,8 +38,8 @@ Using selfbots is against the Discord ToS. I am not responsible for anything tha
 >kill
 >like
 >message [user#tag] [message]
->more-news [tag]
 >news
+>more-news [tag]
 >picture
 >ping
 >status

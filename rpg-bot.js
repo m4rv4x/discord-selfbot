@@ -50,9 +50,9 @@ process.on("unhandledRejection", (error) => {
   });
 
 client.on('ready', () => {
-    client.user.setActivity('Playing RPG', { type: "COMPETING" });
-    console.log(chalk.red(`[${humanReadableDate}] ${client.user.tag} RPG BOT STARTED`));
-    console.log(chalk.yellowBright(`Don't know how to set up? Check our Github: \nhttps://github.com/m4rv4x/rpg-bot`));
+    client.user.setActivity('Playing RPG 🤠', { type: "COMPETING" });
+    console.log(chalk.red(`[${humanReadableDate}] ${client.user.tag} RPG BOT STARTED 👾`));
+    console.log(chalk.yellowBright(`BOT IN EARLY BETA EXPECT SOME BUGS, FEEL FREE TO TEXT ME !!!!: \nhttps://github.com/m4rv4x/rpg-bot`));
     farm_routine();
 });
 
@@ -60,28 +60,38 @@ client.on('messageCreate', async message =>{
     if(message.author.id != botid) return;
     if(!message.author.bot) return;
     if(message.content.includes("de flèche pour ton arc")){
+        console.log(chalk.yellow("[!] I need ARROWS -> -> ->"));
         return message.channel.sendSlash(botid, "rpg acheter", "106", "50");
 //        console.log(chalk.yellow("[!] Need Arrows !!!"));
-//        buy_arrows();
+    }
+    
+    if(message.content.includes("as pas assez pour acheter")){
+        console.log(chalk.yellow("[!] I need MONEY $$$$$$"));
+        return message.channel.sendSlash(botid, "rpg-vendre tout");
+//        console.log(chalk.yellow("[!] Need Arrows !!!"));
     }
     if(message.content.includes("Please get your stats first")){
-        console.log(chalk.yellow("[!] First Start !!!"));
+        console.log(chalk.yellow("[!] FIRST START [NEED TO ADD ROUTINE TO CODE] !!!"));
         first_run();
     }
     if(message.content.includes("Tu es en manque d'énergie")){
+        console.log(chalk.yellow("[!] No More Energy, Eating Pommes !!!"));
         pomme();
+        wait(20);
 //        return message.channel.sendSlash(botid, "rpg manger", "Pomme", "10");
 //        return message.channel.sendSlash(botid, "rpg acheter", "102", "10");
 //        console.log(chalk.yellow("[!] Need to Eat !!!"));
     }
     if(message.content.includes(" Mange de la nourriture afin d'obtenir des points de vie")){
-        wait
+        console.log(chalk.yellow("[!] No More Health, Eating Croissant !!!"));
         croissant();
+        wait(20);
 //        return message.channel.sendSlash(botid, "rpg manger", "Pomme", "10");
 //        return message.channel.sendSlash(botid, "rpg acheter", "102", "10");
 //        console.log(chalk.yellow("[!] Need to Eat !!!"));
     }
     if(message.content.includes("as pas assez de pomme")){
+        console.log(chalk.yellow("[!] No apples"));
         wait(2);
         pomme();
         return message.channel.sendSlash(botid, "rpg acheter", "102", "10");
@@ -90,11 +100,11 @@ client.on('messageCreate', async message =>{
     }
     if(message.content.includes("pas dépasser vos points d'énergie maximum")){
         console.log(chalk.yellow("[!] No Energy, Sleeping !!!"));
-        wait(5);
+        wait(20);
     }
     if(message.content.includes("patienter pour réexécuter cette commande")){
         console.log(chalk.yellow("[!] TOO QUICK - COOLDOWN 30sec !!!"));
-        wait(30);
+        wait(20);
     }
     if(message.content.includes("econde(s) pour réexécuter cette commande")){
         console.log(chalk.blue(message.content));
@@ -141,7 +151,7 @@ function farm_routine() {
         } catch (error) {
             console.log(error)
         }
-        console.log(chalk.red(`[${humanReadableDate}] ${client.user.tag} Hunting !`));
+        console.log(chalk.red(`[${humanReadableDate}] ${client.user.tag} Fishing !`));
     }, 3000);
     setTimeout(async () => {
         try {
@@ -149,7 +159,7 @@ function farm_routine() {
         } catch (error) {
             console.log(error)
         }
-        console.log(chalk.red(`[${humanReadableDate}] ${client.user.tag} Hunting !`));
+        console.log(chalk.red(`[${humanReadableDate}] ${client.user.tag} Mining !`));
     }, 3000);
     setTimeout(async () => {
         try {
@@ -157,7 +167,7 @@ function farm_routine() {
         } catch (error) {
             console.log(error)
         }
-        console.log(chalk.red(`[${humanReadableDate}] ${client.user.tag} Hunting !`));
+        console.log(chalk.red(`[${humanReadableDate}] ${client.user.tag} Cutting wood !`));
     }, 3000);
     setTimeout(async () => {
         try {
@@ -165,7 +175,7 @@ function farm_routine() {
         } catch (error) {
             console.log(error)
         }
-        console.log(chalk.red(`[${humanReadableDate}] ${client.user.tag} Hunting !`));
+        console.log(chalk.red(`[${humanReadableDate}] ${client.user.tag} Gathering !`));
         farm_loop();
     }, 3000);
 }
@@ -188,7 +198,7 @@ function buy_arrows() {
 
 function pomme() {
     setTimeout(async () => {
-        await client.channels.cache.get(channelid).sendSlash(botid, "rpg acheter", "102", "10");
+//        await client.channels.cache.get(channelid).sendSlash(botid, "rpg acheter", "102", "10");   // NEED DEBUG
         console.log(chalk.blueBright(`[*] Buying Food 10x Pommes`));
     }, 3000);
     setTimeout(async () => {
@@ -199,7 +209,7 @@ function pomme() {
 
 function croissant() {
     setTimeout(async () => {
-        await client.channels.cache.get(channelid).sendSlash(botid, "rpg acheter", "104", "2");
+//        await client.channels.cache.get(channelid).sendSlash(botid, "rpg acheter", "104", "2");     // NEED DEBUG
         console.log(chalk.blueBright(`[*] Buying Food 2x Croissant`));
     }, 3000);
     setTimeout(async () => {
@@ -209,11 +219,13 @@ function croissant() {
 }
 
 function wait(timing) {
-    console.log("Waiting for 10 seconds...");
+    console.log("[*] Waiting", timing, "seconds...");
     setTimeout(() => {
-      console.log("Finished waiting for 10 seconds!");
+        console.log("[!] Finished waiting", timing);
     }, timing * 1000);
-  }
+    console.log("[!] Finished waiting", timing);
+
+}
 
 function sleep(seconds) {
     return new Promise(resolve => setTimeout(resolve, seconds * 1000));

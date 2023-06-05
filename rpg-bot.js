@@ -75,31 +75,34 @@ client.on('messageCreate', async message =>{
         first_run();
     }
     if(message.content.includes("Tu es en manque d'énergie")){
-        console.log(chalk.yellow("[!] No More Energy, Eating Pommes !!!"));
-        pomme();
+        console.log(chalk.yellow("[!] LOW ENERGY, Eating Pommes !!!"));
+        return message.channel.sendSlash(botid, "rpg manger", "Pomme", "10");
         wait(20);
 //        return message.channel.sendSlash(botid, "rpg manger", "Pomme", "10");
 //        return message.channel.sendSlash(botid, "rpg acheter", "102", "10");
 //        console.log(chalk.yellow("[!] Need to Eat !!!"));
     }
     if(message.content.includes(" Mange de la nourriture afin d'obtenir des points de vie")){
-        console.log(chalk.yellow("[!] No More Health, Eating Croissant !!!"));
-        croissant();
-        wait(20);
+        console.log(chalk.yellow("[!] LOW HEALTH, Eating Croissant !!!"));
+        return message.channel.sendSlash(botid, "rpg manger", "Croissant", "2");
 //        return message.channel.sendSlash(botid, "rpg manger", "Pomme", "10");
 //        return message.channel.sendSlash(botid, "rpg acheter", "102", "10");
 //        console.log(chalk.yellow("[!] Need to Eat !!!"));
     }
+    if(message.content.includes("pas assez de croissant")){
+        console.log(chalk.yellow("[!] No croissants, buying croissants !"));
+        return message.channel.sendSlash(botid, "rpg acheter", "104", "2");
+//        console.log(chalk.yellow("[!] Need Food !!!"));
+//        buy_food();
+    }
     if(message.content.includes("as pas assez de pomme")){
-        console.log(chalk.yellow("[!] No apples"));
-        wait(2);
-        pomme();
+        console.log(chalk.yellow("[!] No apples, buying apples !"));
         return message.channel.sendSlash(botid, "rpg acheter", "102", "10");
 //        console.log(chalk.yellow("[!] Need Food !!!"));
 //        buy_food();
     }
     if(message.content.includes("pas dépasser vos points d'énergie maximum")){
-        console.log(chalk.yellow("[!] No Energy, Sleeping !!!"));
+        console.log(chalk.yellow("[!] Too Much Energy, Sleeping !!!"));
         wait(20);
     }
     if(message.content.includes("patienter pour réexécuter cette commande")){
@@ -209,7 +212,7 @@ function pomme() {
 
 function croissant() {
     setTimeout(async () => {
-//        await client.channels.cache.get(channelid).sendSlash(botid, "rpg acheter", "104", "2");     // NEED DEBUG
+        await client.channels.cache.get(channelid).sendSlash(botid, "rpg acheter", "104", "2");     // NEED DEBUG
         console.log(chalk.blueBright(`[*] Buying Food 2x Croissant`));
     }, 3000);
     setTimeout(async () => {

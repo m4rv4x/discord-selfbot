@@ -1,8 +1,8 @@
 {
 	"openai_token": "****************************************",
-	"persona": "evil", 
 	"discord_token": "****************************************",
 	"discord_token_logger": "****************************************",
+	"persona": "default", 
 	"prefix": ">",
 	"admin_tag": "daddy#6666",
 	"blacklist_tags": ["lol#1111", "random#1234", "rundim#1234"]

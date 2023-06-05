@@ -1,4 +1,4 @@
-const { Client, Collection, VoiceChannel, MessageEmbed, MessageContextMenuInteraction } = require('discord.js-selfbot-v13');
+const { Client } = require('discord.js-selfbot-v13');
 const fs = require('fs');
 
 const client = new Client({

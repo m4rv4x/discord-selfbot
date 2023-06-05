@@ -53,7 +53,7 @@ client.on('messageCreate', async message =>{
             try {
                 command.run(message, args, command, client);
                 var d = new Date();
-                fs.appendFile('log.txt', `[${new Date().toLocaleString()}] ${message.author.tag} used command: ${cmd} ${args}\n`, function (err) {
+                fs.appendFile('voice.log', `[${new Date().toLocaleString()}] ${message.author.tag} used command: ${cmd} ${args}\n`, function (err) {
                 const currentDate = new Date();
                 const humanReadableDate = currentDate.toLocaleString();
                 console.log(`[${humanReadableDate}] ✔ [${author}] : ${cmd} ${args} `);

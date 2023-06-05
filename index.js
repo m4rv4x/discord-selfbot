@@ -1,5 +1,5 @@
 
-const { Client, Collection, VoiceChannel, MessageEmbed, MessageContextMenuInteraction } = require('discord.js-selfbot-v13');
+const { Client, Collection} = require('discord.js-selfbot-v13');
 const fs = require('fs');
 const chalk = require('chalk');
 
@@ -51,9 +51,8 @@ client.on('messageCreate', async message =>{
     setTimeout(() => {
 		try {
 			command.run(message, args, command, client);
-            fs.appendFile('log.txt', `[${new Date().toLocaleString()}] ${message.author.tag} used command: ${cmd} ${args}\n`, function (err) {
+            fs.appendFile('index.log', `[${new Date().toLocaleString()}] ${message.author.tag} used command: ${cmd} ${args}\n`, function (err) {
             console.log(chalk.green(`[${humanReadableDate}] [*] [${author}] : ${cmd} ${args} `));
-
             });
 
         } catch (error) {

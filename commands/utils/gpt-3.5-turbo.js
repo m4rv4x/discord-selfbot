@@ -35,7 +35,7 @@ module.exports = {
         });
         await m.edit(`${completion.data.choices[0].message.content}`) 
       } catch (err) {
-        await m.edit(`[!] Je ne peux pas vous aider mon algorythme est défaillant`) 
+        await m.edit(`**[!] Erreur** Veuillez reformuler votre demande`) 
         console.error("Invalid OPEN AI TOKEN");
       }
 

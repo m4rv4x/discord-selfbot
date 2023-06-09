@@ -10,7 +10,7 @@ module.exports = {
       async function deleteMessage(me){
           setTimeout(() => {
               me.delete();
-          }, 90000)
+          }, 60000)
       }
 
       await message.channel.send("Showing available commands . . .").then(async m => {

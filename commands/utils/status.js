@@ -1,7 +1,7 @@
 
 module.exports = {
     name: "status",
-    aliases: ['v'],
+    aliases: ['state'],
     description: "Version of software",
     run: async (message, args, command, client, cpu, ram, disk) => {
 
@@ -22,7 +22,7 @@ module.exports = {
         const seconds = Math.floor(uptime / 1000) % 60;
         const humanUptime = `${days} days, ${hours} hours, ${minutes} minutes, and ${seconds} seconds`;
         const persona = config.persona
-        await m.edit(`初段 SHODAN v${version}\nは英語の単語であるため、英語で回答することができます。\n**[*]** Pong! latency is \`${m.createdTimestamp - message.createdTimestamp}ms\`\n**[*]** Uptime : \`${humanUptime}\`.\n**[*]** Persona : \`${persona}\`\n**[*]** CPU : \`${cpu}\`\n**[*]** RAM : \`${ram}\`\n**[*]** Disk : \`${disk}\``).then(me => deleteMessage(me));
+        await m.edit(`初段 SHODAN v${version}\nは英語の単語であるため、英語で回答することができます。\n**[*]** Pong! latency is \`${m.createdTimestamp - message.createdTimestamp}ms\`\n**[*]** Uptime : \`${humanUptime}\`.\n**[*]** Persona : \`${persona}\``).then(me => deleteMessage(me));
     });
 
   }

@@ -9,7 +9,7 @@ module.exports = {
         …..lovelovelove….
         ...lovelovelovelove……………….….
         ...lovelovelovelovelo…………..lovel….
-        .....lovelovelovelovelove…….…lovelovelo.
+        ..lovelovelovelovelove…….…lovelovelo.
         .. lovelovelovelovelove…….…lovelovelo.
         ...lovelovelovelovelove…..…lovelovelo…
         ..…lovelovelovelovelove..…lovelovelo…*

@@ -1,6 +1,5 @@
-
 // NEW FUNCTION TO RUN COMMANDS WITH 1s DELAY
-const { Client, Collection } = require('discord.js-selfbot-v13');
+const { Client, Collection, Interaction } = require('discord.js-selfbot-v13');
 const chalk = require('chalk');
 const humanReadableDate = new Date().toLocaleString();
 const fs = require('fs');
@@ -14,57 +13,72 @@ const client = new Client({
     ws: { properties: { $browser: "Discord iOS" }}
 });
 
-function Adventure(channelid) {
-      wait(12);
-      console.log(chalk.green("Sending Adventure command..."));
-      client.channels.cache.get(channelid).sendSlash(botid, 'adv');   
-      const message = waitReply(channelid, botid);
+async function adv() {
+  console.log(chalk.green("Sending Adventure command..."));
+  await setTimeout(() => {
+        client.channels.cache.get(channelid).sendSlash(botid, 'adv');
+        }, 15000);
+} 
+
+async function advRoutine() {
+  console.log(chalk.green("ADV ROUTINE"));
+
+  setInterval(async () => {
+    console.log(chalk.green("Loop adv every 13-15sec"));
+    client.channels.cache.get(channelid).sendSlash(botid, 'adv');
+  }, 15000);
+  
+}
+
+async function Stats() {
+  console.log(chalk.green("Sending Stats command..."));
+  await setTimeout(() => {
+    client.channels.cache.get(channelid).sendSlash(botid, "stats", "1010674903181172856");
+    console.log(chalk.green(message));
+    }, 5000);
+    //return Stats = 
+}
+
+async function searchRoutine() {
+  console.log(chalk.green("Sending Search Routine "));
+  setInterval(async () => {
+    console.log(chalk.green("Loop Search every 10 mins"));
+    await Search();
+  }, 600000);
   }
 
-function buyPotion() {
+
+async function buyPotion(howmany) {
   console.log(chalk.green("Buying Potions !!"));
-  setTimeout(() => {
-    client.channels.cache.get(channelid).sendSlash(botid, 'buy', "Health Potion", "1");
+  await setTimeout(() => {
+    client.channels.cache.get(channelid).sendSlash(botid, "buy", "Health Potion", "2");
     }, 1000);
-    message = waitReply(channelid, botid);
 }
 
-function heal() {
+async function heal() {
   console.log(chalk.green("Healing !!"));
-  setTimeout(() => {
+  await setTimeout(() => {
   client.channels.cache.get(channelid).sendSlash(botid, "heal");
-  }, 1000);
-  message = waitReply(channelid, botid);
+  }, 4000);
+
 }
 
-
-function healPet() {
+async function healPet() {
   console.log(chalk.green("Healing Pet !!"));
-  setTimeout(() => {
+  await setTimeout(() => {
   client.channels.cache.get(channelid).sendSlash(botid, "pet heal");
-  }, 3000);
-  message = waitReply(channelid, botid);
+  }, 8000);
 }
 
-function firstrun() {
+async function firstrun() {
   console.log(chalk.green("First Run : Function Stats run !!!"));
-  setTimeout(() => {
+  await setTimeout(() => {
     client.channels.cache.get(channelid).sendSlash(botid, 'stats', author.botid);
     const channel = client.channels.fetch(channelid);
     // channel.send("Hello")
-    channel.sendSlash(botid, "stats", "1010674903181172856");
+    channel.sendSlash(botid, "stats", client.author.id);
   }, 1000);
 }
-
-
-function wait(timing) {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve();
-    }, timing * 1000);
-  });
-}
-
 
 function waitReply(channelid, botid) {
   return new Promise(resolve => {
@@ -76,63 +90,64 @@ function waitReply(channelid, botid) {
   });
 }
 
-
 client.on('ready', async () => {
   console.log(chalk.yellow(`${client.user.username} is ready!`));
   const channel = await client.channels.fetch(channelid);
-  // channel.send("Hello")
-  channel.sendSlash(botid, "stats", "1010674903181172856");
-  message = await waitReply(channelid, botid);
-//  wait(15);
-  while (1) {
-    console.log(chalk.blue(message.content))
-    console.log(chalk.green("LOOP START checking response"))
-    if (message.content.includes("Please get your stats first")) {
-      console.log(chalk.green("Received reply from bot, need first_run"));
-      firstrun();
-    }
-
-      if (message.content.includes("- ghostface has ") || message.content.includes("- Health: ")) {
-      console.log(chalk.red("!!!!!! Low Health"));
-      buyPotion();
-      await wait(5);
-      heal();
-      await wait(5);
-    }
-
-    if (message.content.includes("- Pet Rock has ")) {
-      console.log(chalk.red(" !!!!!!!!! Pet : Low Health"));
-      buyPotion();
-      await wait(5);
-      healPet();
-      await wait(5);
-    }
-
-    else {
-      Adventure(channelid)
-      message = await waitReply(channelid, botid);
-      console.log(chalk.green("[*] ADV"));
-      await wait(15)
-    }
-    wait(11);
-    console.log(chalk.green("LOOP END"))
-  }
-  console.log(chalk.red("LOOP STOP"));
-})
+  Stats();
+  advRoutine();
+});
 
 
-
-function first_run() {
+async function first_run() {
   console.log(chalk.green("First Run : Function Stats run !!!"));
-  setTimeout(() => {
-    client.channels.cache.get(channelid).sendSlash(botid, 'stats', author.botid);
-    const channel = client.channels.fetch(channelid);
-    // channel.send("Hello")
-    channel.sendSlash(botid, "stats", "1010674903181172856");
+  await setTimeout(() => {
+    Stats();
   }, 1000);
 }
 
 
+client.on('messageCreate', async message =>{
+  if (message.author.id === botid && message.channel.id === channelid) {
+  if(message.author.id != botid) return;
+  if(message.content.includes("Please get your stats first")) {
+    console.log(chalk.green("Received reply from bot, need first_run"));
+    firstrun();
+  } 
+  
+  if(message.content.includes("- ghostface has ") && message.content.includes("- Pet Rock has ")) {
+  console.log(chalk.red("!!!!!! Low Health"));
+  buyPotion();
+  heal();
+  healPet();
+  }
+
+  if(message.content.includes("you can use this command again")) {
+    console.log(chalk.red("!!!!!!!!! Cooldown too fast watching stats"));
+    Stats();
+  }
+  if(message.content.includes("- Pet Rock has ")) {
+    console.log(chalk.red("!!!!!!!!! Pet : Low Health"));
+    buyPotion("2");
+    healPet();
+  }
+  if((message.content.includes("- Health: ")) || (message.content.includes("- ghostface has "))) {
+    console.log(chalk.red("!!!!!! Low Health"));
+    buyPotion("2");
+    heal();
+  }
+  if(message.content.includes("Bought")) {
+    console.log(chalk.blue("BOUGHT"));
+  }
+  if(message.content.includes("healed")) {
+    console.log(chalk.blue("HEALED"));
+  }
+  if(!message.content.includes("!===")) {
+    console.log(message.content);
+    console.log(chalk.red("ERROR can't understand Message"));
+  }
+  console.log(chalk.yellow("Loop Done"))
+};
+}
+),
+
 client.login(config.discord_token);
-
-

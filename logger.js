@@ -43,7 +43,6 @@ client.on('messageCreate', async message =>{
         fs.appendFile('big-brother.log', `[${new Date().toLocaleString()}] ${author}@${guild}>${channel}: ${message.content}\n`, function (err) {
             console.log(chalk.gray(`[${humanReadableDate}] [${chalk.blue(guild)}]=>[${chalk.blue(channel)}]:`));
             console.log(chalk.green(`[${author}]\t[${chalk.cyan(message.content)}] `));
-            
         });
 });
 

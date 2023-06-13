@@ -24,7 +24,7 @@ client.categories = fs.readdirSync("./commands/");
 
 client.on('ready', () => {
     client.user.setActivity('System Shock', { type: "COMPETING" });
-    console.log(chalk.green(`${client.user.username} is running.`));
+    console.log(chalk.blueBright(`${client.user.tag} is running.`));
 })
 
 // HANDLE COMMANDS >

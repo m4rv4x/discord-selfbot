@@ -1,4 +1,6 @@
+
 const {readdirSync} = require('fs');
+const chalk = require('chalk');
 
 module.exports = (client) => {
     readdirSync('./commands/').forEach(dir => {
@@ -7,11 +9,13 @@ module.exports = (client) => {
             let pull = require(`../commands/${dir}/${file}`);
             if(pull.name){
                 client.commands.set(pull.name, pull);
-                console.log(`[+] Command succesfully loaded : ${file}`);
+                console.log(chalk.green(`[+] Module loaded : ${file}`));
             } else {
-				console.log(`[-] Error when loading command : ${file}`);
+				console.log(chalk.red(`[-] Error Loading module : ${file}`));
                 continue;
             }if(pull.aliases && Array.isArray(pull.aliases)) pull.aliases.forEach(alias => client.aliases.set(alias, pull.name));
         }
     });
 }
+
+

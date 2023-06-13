@@ -1,10 +1,10 @@
 module.exports = {
-    name: "troll-nadohs",
-    aliases: ['troll3'],
+    name: "troll-users",
+    aliases: ['troll2'],
     description: "Trolls the user with a random sentence.",
     run: async (message, args, command, client) => {
 
-        const shodanQuotes = require('../data/shodan_quotes.json');
+        const shodanQuotes = require('../../data/shodan_quotes.json');
 
 async function deleteMessage(me){
     setTimeout(() => {

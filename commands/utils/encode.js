@@ -18,7 +18,7 @@ module.exports = {
 
     setTimeout(() => {
         message.channel.send(`${encodedText}`);
-        message.channel.send(`https://cataas.com/cat/cute/says/#${encodedText}`);
+        message.channel.send(`https://cataas.com/cat/cute/says/:${encodedText}`);
       }, 100);
 
   }

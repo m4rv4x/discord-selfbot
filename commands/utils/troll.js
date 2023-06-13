@@ -4,7 +4,7 @@ module.exports = {
     description: "Trolls the user with a random sentence.",
     run: async (message, args, command, client) => {
 
-        const shodanQuotes = require('../data/shodan_quotes.json');
+        const shodanQuotes = require("../../data/shodan_quotes.json");
   
 
       async function deleteMessage(me){

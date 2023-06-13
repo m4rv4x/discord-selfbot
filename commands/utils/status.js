@@ -4,7 +4,6 @@ module.exports = {
     aliases: ['state'],
     description: "Version of software",
     run: async (message, args, command, client, cpu, ram, disk) => {
-
       
       async function deleteMessage(me){
         setTimeout(() => {

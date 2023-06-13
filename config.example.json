@@ -1,9 +1,12 @@
 {
-	"openai_token": "****************************************",
-	"discord_token": "****************************************",
-	"discord_token_logger": "****************************************",
-	"persona": "default", 
+	"openai_token": "sk-***********************",
+	"persona": "evil", 
+	"discord_token": "M*****************************************",
+	"discord_token2": "M****************************************",
+	"discord_token_logger": "M************************************************",
 	"prefix": ">",
-	"admin_tag": "daddy#6666",
-	"blacklist_tags": ["lol#1111", "random#1234", "rundim#1234"]
+	"admin_tag": "m4rv4x#1234",
+	"blacklist_tags": ["Random#0000", "Random#1111"],
+	"Guild": "0000000000000000",
+	"Channel": "000000000000000000"
 }

@@ -1,10 +1,9 @@
-
-const { Client } = require('discord.js-selfbot-v13');
-const { joinVoiceChannel } = require("@discordjs/voice");
-const googleTTS = require('google-tts-api');
-const gtts = require('gtts');
+const discordTTS=require("discord-tts");
+const { Client, Intents } = require('discord.js-selfbot-v13');
+//const { Client, Intents} = require("discord.js");
+const {AudioPlayer, createAudioResource, StreamType, entersState, VoiceConnectionStatus, joinVoiceChannel} = require("@discordjs/voice");
 const config = require(`${process.cwd()}/config.json`);
-const delay = Math.floor(Math.random() * 1400) + 2000; // random delay between 1 and 3 seconds
+const gtts = require('gtts');
 
 const client = new Client({ checkUpdate: false });
 
@@ -13,6 +12,9 @@ client.on('ready', async () => {
     console.log(`${client.user.tag} is running. 😈`);
     await joinVC(client, config);
 });
+
+let voiceConnection;
+let audioPlayer=new AudioPlayer();
 
 client.on('voiceStateUpdate', async (oldState, newState) => {
     const oldVoice = oldState.channelId;
@@ -32,6 +34,29 @@ client.on('voiceStateUpdate', async (oldState, newState) => {
         }
     }
 });
+
+
+client.on("messageCreate", async (msg)=>{
+    if(msg.content=="tts")
+    {
+        const stream=discordTTS.getVoiceStream("hello text to speech world");
+        const audioResource=createAudioResource(stream, {inputType: StreamType.Arbitrary, inlineVolume:true});
+        if(!voiceConnection || voiceConnection?.status===VoiceConnectionStatus.Disconnected){
+            voiceConnection = joinVoiceChannel({
+                channelId: msg.member.voice.channelId,
+                guildId: msg.guildId,
+                adapterCreator: msg.guild.voiceAdapterCreator,
+            });
+            voiceConnection=await entersState(voiceConnection, VoiceConnectionStatus.Connecting, 5_000);
+        }
+        
+        if(voiceConnection.status===VoiceConnectionStatus.Connected){
+            voiceConnection.subscribe(audioPlayer);
+            audioPlayer.play(audioResource);
+        }
+    }
+});
+
 
 async function joinVC(client, config) {
     const guild = client.guilds.cache.get(config.Guild);
@@ -57,5 +82,3 @@ async function joinVC(client, config) {
 }
 
 client.login(config.discord_token);
-
-
